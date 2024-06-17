@@ -107,11 +107,13 @@
         const annualAmountBeforeGST = dailyAmount * 365;
         const emd = 0.05 * annualAmountBeforeGST;
         const annualAmountAfterGST = annualAmountBeforeGST * 0.84746;
+         const emdWithGST = annualAmountWithGST * 0.05; 
         const row = tableBody.insertRow(0);
         row.insertCell().textContent = dailyAmount.toFixed(2);
         row.insertCell().textContent = annualAmountBeforeGST.toFixed(2);
         row.insertCell().textContent = emd.toFixed(2);
-        row.insertCell().textContent = annualAmountAfterGST.toFixed(2); 
+        row.insertCell().textContent = annualAmountAfterGST.toFixed(2);
+          row.insertCell().textContent = emdWithGST.toFixed(2); 
          
         
       } else {
