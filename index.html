@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EMD/Anuual Calculation</title>
+  <title>IRPES Calculation - Annual, EMD and GST</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { 
-      font-size: 16px; 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    body {
+      font-size: 16px;
+      margin: 20px; /* Add margin for better spacing */
     }
 
     h2 {
@@ -23,39 +21,33 @@
     input, button {
       padding: 8px;
       margin-bottom: 10px;
+      width: 100%; /* Make input and button full width on mobile */
+      box-sizing: border-box; /* Include padding and border in element width */
     }
 
-    table { 
-      width: 100%; 
+    table {
+      width: 100%;
       border-collapse: collapse;
+      table-layout: fixed; /* Ensure table cells have equal width */
     }
 
-    th, td { 
-      border: 1px solid black; 
-      text-align: center; 
-      padding: 5px; 
+    th, td {
+      border: 1px solid black;
+      text-align: center;
+      padding: 5px;
+      word-wrap: break-word; /* Allow text to wrap */
     }
 
     thead {
-      position: sticky; 
-      top: 0; 
-      background-color: lightgray; 
-    }
-
-    @media (max-width: 600px) { 
-      th, td {
-        font-size: 12px; 
-      }
-
-      th {
-        word-wrap: break-word; /* Allow header text to wrap on small screens */
-      }
+      position: sticky;
+      top: 0;
+      background-color: lightgray;
     }
   </style>
 </head>
 <body>
 
-  <h2> IRPES Calculation -Annual, EMD and GST</h2>
+  <h2>IRPES Calculation - Annual, EMD and GST</h2>
   <h3><a href="https://www.instagram.com/i_sahil.saurav/">by- Sahil</a></h3>
 
   <label for="dailyAmount">Enter Daily Amount (₹):</label>
@@ -66,16 +58,24 @@
     <thead>
       <tr>
         <th>Daily Amount (₹)</th>
-        <th>Annual Amount<br>(Without GST) (₹)</th>
+        <th>Annual<br>(No GST) (₹)</th>
         <th>EMD<br>(5%) (₹)</th>
-        <th>Annual Amount<br>(After 18% GST (अगर 18% GST लगता है।) (₹)</th>
+        <th>Annual<br>(+18% GST) (₹)</th>
       </tr>
     </thead>
-    <tbody></tbody> 
+    <tbody></tbody>
   </table>
   <hr>
   <hr>
- <a href="BID.html">IRPES- BID CALCULATOR</a>  
+  <a href="BID.html">IRPES- BID CALCULATOR</a>
+
+  <script>
+    // ... (same JavaScript code as before) ...
+  </script>
+
+</body>
+</html>
+ 
   <script>
     function calculateEMD() {
       const dailyAmount = parseFloat(document.getElementById("dailyAmount").value);
