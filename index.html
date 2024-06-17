@@ -105,8 +105,7 @@
       if (!isNaN(dailyAmount) && dailyAmount > 0) {
         const annualAmountBeforeGST = dailyAmount * 365;
         const emd = 0.05 * annualAmountBeforeGST;
-        const annualAmountAfterGST = annualAmountBeforeGST - (annualAmountBeforeGST * 0.18); 
-
+        const annualAmountAfterGST = = annualAmountBeforeGST * 0.82;
         const row = tableBody.insertRow(0);
         row.insertCell().textContent = dailyAmount.toFixed(2);
         row.insertCell().textContent = annualAmountBeforeGST.toFixed(2);
