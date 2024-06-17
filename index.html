@@ -73,7 +73,7 @@
 </head>
 <body>
 
-  <h2>IRPES Calculation - Annual, EMD, and GST</h2>
+ <h2>IRPES Calculation - Annual, EMD, and GST</h2>
   <h3><a href="https://www.instagram.com/i_sahil.saurav/">by Sahil</a></h3>
 
   <label for="dailyAmount">Enter Daily Amount (₹):</label>
@@ -84,9 +84,9 @@
     <thead>
       <tr>
         <th>Daily Amount (₹)</th>
-        <th>Annual Amount<br>(Without GST) (₹)</th>
+        <th>Annual Amount<br>(Without GST (अगर GST नही है तो यह amount डाले ) (₹)</th>
         <th>EMD<br>(5%) (₹)</th>
-        <th>Annual Amount<br>(  Before 18% GST (अगर 18% GST लगता है। तो Bid में यह अमाउंट डाले। आपको प्रति दिन उतना परेगा जितना आपने Daily में डाला है।) (₹)</th>
+        <th>Annual Amount<br>(  Before 18% GST (अगर 18% GST लगता है। तो Bid में यह अमाउंट डाले। आपको प्रति दिन उतना परेगा जितना आपने Daily में डाला है।(₹)</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -97,8 +97,7 @@
   <a href="BID.html">IRPES- BID CALCULATOR</a>
 
   <script>
-    const historyTableBody = document.getElementById("historyTable").getElementsByTagName('tbody')[0];
-
+   
     function calculateEMD() {
       const dailyAmount = parseFloat(document.getElementById("dailyAmount").value);
       const tableBody = document.getElementById("emdTable").getElementsByTagName('tbody')[0];
@@ -106,18 +105,19 @@
       if (!isNaN(dailyAmount) && dailyAmount > 0) {
         const annualAmountBeforeGST = dailyAmount * 365;
         const emd = 0.05 * annualAmountBeforeGST;
-        const annualAmountAfterGST = annualAmountBeforeGST * 0.18; // Corrected calculation for after GST
+        const annualAmountAfterGST = annualAmountBeforeGST + (annualAmountBeforeGST * 0.18); 
 
         const row = tableBody.insertRow(0);
         row.insertCell().textContent = dailyAmount.toFixed(2);
         row.insertCell().textContent = annualAmountBeforeGST.toFixed(2);
         row.insertCell().textContent = emd.toFixed(2);
-        row.insertCell().textContent = annualAmountAfterGST.toFixed(2);
-
-      
+        row.insertCell().textContent = annualAmountBeforeGST.toFixed(2); 
+         
+        
       } else {
         alert("Please enter a valid positive daily amount.");
       }
+    }
   </script>
 </body>
 </html>
