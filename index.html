@@ -2,29 +2,55 @@
 <html>
 <head>
   <title>EMD Calculation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body { 
-      display: flex; /* Use flexbox for centering */
-      flex-direction: column; /* Stack content vertically */
-      align-items: center;   /* Center items horizontally */
+      font-size: 16px; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, button {
+      padding: 8px;
+      margin-bottom: 10px;
     }
 
     table { 
-      width: 90%; /* Make table responsive to screen width */
-      max-width: 800px; /* Set a maximum width for larger screens */
-      border-collapse: collapse; 
+      width: 100%; 
+      border-collapse: collapse;
     }
 
     th, td { 
       border: 1px solid black; 
       text-align: center; 
-      padding: 8px; 
+      padding: 5px; 
     }
 
-    thead { 
-      position: sticky; top: 0; 
+    thead {
+      position: sticky; 
+      top: 0; 
       background-color: lightgray; 
-    } 
+    }
+
+    @media (max-width: 600px) { 
+      th, td {
+        font-size: 12px; 
+      }
+
+      th {
+        word-wrap: break-word; /* Allow header text to wrap on small screens */
+      }
+    }
   </style>
 </head>
 <body>
@@ -39,16 +65,33 @@
     <thead>
       <tr>
         <th>Daily Amount (₹)</th>
-        <th>Annual Amount (Before GST) (₹)</th>
-        <th>EMD (5%) (₹)</th>
-        <th>Annual Amount (After 18% GST) (₹)</th>
+        <th>Annual Amount<br>(Before GST) (₹)</th>
+        <th>EMD<br>(5%) (₹)</th>
+        <th>Annual Amount<br>(After 18% GST) (₹)</th>
       </tr>
     </thead>
     <tbody></tbody> 
   </table>
 
   <script>
-    // ... (JavaScript code remains the same)
+    function calculateEMD() {
+      const dailyAmount = parseFloat(document.getElementById("dailyAmount").value);
+      const tableBody = document.getElementById("emdTable").getElementsByTagName('tbody')[0];
+
+      if (!isNaN(dailyAmount) && dailyAmount > 0) {
+        const annualAmountBeforeGST = dailyAmount * 365;
+        const emd = 0.05 * annualAmountBeforeGST;
+        const annualAmountAfterGST = annualAmountBeforeGST * 0.82; 
+
+        const row = tableBody.insertRow(0);
+        row.insertCell().textContent = dailyAmount.toFixed(2);
+        row.insertCell().textContent = annualAmountBeforeGST.toFixed(2);
+        row.insertCell().textContent = emd.toFixed(2);
+        row.insertCell().textContent = annualAmountAfterGST.toFixed(2);
+      } else {
+        alert("Please enter a valid positive daily amount.");
+      }
+    }
   </script>
 
 </body>
