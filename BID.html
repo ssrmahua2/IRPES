@@ -94,16 +94,28 @@
     <tbody></tbody>
   </table>
 
-  <div id="calculationHistory">
-    <h3>Calculation History</h3>
-  </div>
-  
+  <h3>Search History</h3>
+  <table id="historyTable">
+    <thead>
+      <tr>
+        <th>Daily Amount (₹)</th>
+        <th>Bid Value (3 Years) (₹)</th>
+        <th>Bid Value (15 Years) (₹)</th>
+        <th>Daily Amount (With 18% GST) (₹)</th>
+        <th>Annual Amount (With 18% GST) (₹)</th>
+        <th>Bid Value (3 Years) (With 18% GST) (₹)</th>
+        <th>Bid Value (15 Years) (With 18% GST) (₹)</th>
+        <th>EMD (5%) (₹)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
   <hr>
   <hr>
   <a href="index.html">IRPES- Annual EMD GST CALCULATOR</a>
-
   <script>
-    const calculationHistoryDiv = document.getElementById('calculationHistory');
+    const historyTableBody = document.getElementById("historyTable").getElementsByTagName('tbody')[0];
 
     function calculateBidValues() {
       const totalAnnualAmount = parseFloat(document.getElementById("totalAnnualAmount").value);
@@ -131,37 +143,14 @@
         row.insertCell().textContent = emd.toFixed(2);
 
         // Update Calculation History
-        updateCalculationHistory(totalAnnualAmount);
+        updateCalculationHistory(dailyAmount, bidValue3Years, bidValue15Years, dailyAmountWithGST, annualAmountWithGST, bidValue3YearsWithGST, bidValue15YearsWithGST, emd); 
       } else {
         alert("Please enter a valid positive annual amount.");
       }
     }
-   
-    function updateCalculationHistory(totalAnnualAmount) {
-      // Create a new table to display the history for this calculation
-      const historyTable = document.createElement('table');
-      const headerRow = historyTable.insertRow();
-      headerRow.insertCell().textContent = 'Daily Amount (₹)';
-      headerRow.insertCell().textContent = 'Bid Value (3 Years) (₹)';
-      headerRow.insertCell().textContent = 'Bid Value (15 Years) (₹)';
-      headerRow.insertCell().textContent = 'Daily Amount (With 18% GST) (₹)';
-      headerRow.insertCell().textContent = 'Annual Amount (With 18% GST) (₹)';
-      headerRow.insertCell().textContent = 'Bid Value (3 Years) (With 18% GST) (₹)';
-      headerRow.insertCell().textContent = 'Bid Value (15 Years) (With 18% GST) (₹)';
-      headerRow.insertCell().textContent = 'EMD (5%) (₹)';
-      
-      // ... (calculate values like in calculateBidValues function) ...
-        const dailyAmount = totalAnnualAmount / 365;
-        const bidValue3Years = totalAnnualAmount * 3;
-        const bidValue15Years = totalAnnualAmount * 15;
-        const dailyAmountWithGST = (totalAnnualAmount * 1.18) / 365;
-        const annualAmountWithGST = totalAnnualAmount * 1.18;
-        const bidValue3YearsWithGST = bidValue3Years * 1.18;
-        const bidValue15YearsWithGST = bidValue15Years * 15;
-        const emd = 0.05 * totalAnnualAmount;
-
-
-      const row = historyTable.insertRow();
+  
+    function updateCalculationHistory(dailyAmount, bidValue3Years, bidValue15Years, dailyAmountWithGST, annualAmountWithGST, bidValue3YearsWithGST, bidValue15YearsWithGST, emd) {
+      const row = historyTableBody.insertRow();
       row.insertCell().textContent = dailyAmount.toFixed(2);
       row.insertCell().textContent = bidValue3Years.toFixed(2);
       row.insertCell().textContent = bidValue15Years.toFixed(2);
@@ -170,9 +159,6 @@
       row.insertCell().textContent = bidValue3YearsWithGST.toFixed(2);
       row.insertCell().textContent = bidValue15YearsWithGST.toFixed(2);
       row.insertCell().textContent = emd.toFixed(2);
-
-      // Add the new table to the history div
-      calculationHistoryDiv.appendChild(historyTable);
     }
   </script>
 
