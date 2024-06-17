@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bid Value Calculator</title>
+  <style>
+    body { 
+      font-size: 16px; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, button {
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    table { 
+      width: 100%; 
+      border-collapse: collapse;
+    }
+
+    th, td { 
+      border: 1px solid black; 
+      text-align: center; 
+      padding: 5px; 
+    }
+
+    thead {
+      position: sticky; 
+      top: 0; 
+      background-color: lightgray; 
+    }
+
+    @media (max-width: 600px) { 
+      th, td {
+        font-size: 12px; 
+      }
+
+      th {
+        word-wrap: break-word; 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>IRPES - Bid Value Calculator</h2>
+
+  <label for="totalAnnualAmount">Enter Total Annual Amount (₹):</label>
+  <input type="number" id="totalAnnualAmount" value="182500">
+  <button onclick="calculateBidValues()">Calculate</button>
+
+  <table id="bidTable">
+    <thead>
+      <tr>
+        <th>Daily Amount (₹)</th>
+        <th>Bid Value (3 Years) (₹)</th>
+        <th>Bid Value (15 Years) (₹)</th>
+        <th>Daily Amount (With 18% GST) (₹)</th>
+        <th>Bid Value (3 Years) (With 18% GST) (₹)</th>
+        <th>Bid Value (15 Years) (With 18% GST) (₹)</th>
+        <th>EMD (5%) (₹)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    function calculateBidValues() {
+      const totalAnnualAmount = parseFloat(document.getElementById("totalAnnualAmount").value);
+      const tableBody = document.getElementById("bidTable").getElementsByTagName('tbody')[0];
+
+      tableBody.innerHTML = ''; // Clear previous results
+
+      if (!isNaN(totalAnnualAmount) && totalAnnualAmount > 0) {
+        const dailyAmount = totalAnnualAmount / 365;
+        const bidValue3Years = totalAnnualAmount * 3;
+        const bidValue15Years = totalAnnualAmount * 15;
+        const dailyAmountWithGST = (totalAnnualAmount * 1.18) / 365; // Add 18% GST
+        const bidValue3YearsWithGST = bidValue3Years * 1.18;
+        const bidValue15YearsWithGST = bidValue15Years * 1.18;
+        const emd = 0.05 * totalAnnualAmount;
+
+        const row = tableBody.insertRow(0);
+        row.insertCell().textContent = dailyAmount.toFixed(2);
+        row.insertCell().textContent = bidValue3Years.toFixed(2);
+        row.insertCell().textContent = bidValue15Years.toFixed(2);
+        row.insertCell().textContent = dailyAmountWithGST.toFixed(2);
+        row.insertCell().textContent = bidValue3YearsWithGST.toFixed(2);
+        row.insertCell().textContent = bidValue15YearsWithGST.toFixed(2);
+        row.insertCell().textContent = emd.toFixed(2);
+      } else {
+        alert("Please enter a valid positive annual amount.");
+      }
+    }
+  </script>
+
+</body>
+</html>
+
