@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EMD/Anuual Calculation</title>
+  <title>IRPES - EMD/Annual Calculation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { 
-      font-size: 16px; 
+    body {
+      font-family: sans-serif;
+      font-size: 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 20px;
     }
 
-    h2 {
+    h2, h3 {
       text-align: center;
+      margin-bottom: 10px;
     }
 
     label {
@@ -23,45 +26,54 @@
     input, button {
       padding: 8px;
       margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
-    table { 
-      width: 100%; 
+    table {
+      width: 100%;
+      max-width: 800px;
       border-collapse: collapse;
+      margin-top: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    th, td { 
-      border: 1px solid black; 
-      text-align: center; 
-      padding: 5px; 
+    th, td {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 8px;
     }
 
     thead {
-      position: sticky; 
-      top: 0; 
-      background-color: lightgray; 
+      background-color: #f2f2f2;
     }
- button {
-      background-color: #4CAF50; 
+
+    button {
+      background-color: #4CAF50;
       color: white;
       border: none;
       cursor: pointer;
     }
-    @media (max-width: 600px) { 
-      th, td {
-        font-size: 12px; 
-      }
 
-      th {
-        word-wrap: break-word; /* Allow header text to wrap on small screens */
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 600px) {
+      table {
+        font-size: 14px;
+      }
+      th, td {
+        padding: 6px;
       }
     }
   </style>
 </head>
 <body>
 
-  <h2> IRPES Calculation -Annual, EMD and GST</h2>
-  <h3><a href="https://www.instagram.com/i_sahil.saurav/">by- Sahil</a></h3>
+  <h2>IRPES Calculation - Annual, EMD, and GST</h2>
+  <h3><a href="https://www.instagram.com/i_sahil.saurav/">by Sahil</a></h3>
 
   <label for="dailyAmount">Enter Daily Amount (₹):</label>
   <input type="number" id="dailyAmount" value="100">
@@ -73,15 +85,32 @@
         <th>Daily Amount (₹)</th>
         <th>Annual Amount<br>(Without GST) (₹)</th>
         <th>EMD<br>(5%) (₹)</th>
-        <th>Annual Amount<br>(After 18% GST (अगर 18% GST लगता है।) (₹)</th>
+        <th>Annual Amount<br>(After 18% GST) (₹)</th>
       </tr>
     </thead>
-    <tbody></tbody> 
+    <tbody></tbody>
   </table>
+
+  <h3>Search History</h3>
+  <table id="historyTable">
+    <thead>
+      <tr>
+        <th>Daily Amount (₹)</th>
+        <th>Annual Amount (₹)</th>
+        <th>EMD (₹)</th>
+        <th>Annual Amount (After GST) (₹)</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
   <hr>
   <hr>
- <a href="BID.html">IRPES- BID CALCULATOR</a>  
+  <a href="BID.html">IRPES- BID CALCULATOR</a>
+
   <script>
+    const historyTableBody = document.getElementById("historyTable").getElementsByTagName('tbody')[0];
+
     function calculateEMD() {
       const dailyAmount = parseFloat(document.getElementById("dailyAmount").value);
       const tableBody = document.getElementById("emdTable").getElementsByTagName('tbody')[0];
@@ -89,18 +118,28 @@
       if (!isNaN(dailyAmount) && dailyAmount > 0) {
         const annualAmountBeforeGST = dailyAmount * 365;
         const emd = 0.05 * annualAmountBeforeGST;
-        const annualAmountAfterGST = annualAmountBeforeGST * 0.82; 
+        const annualAmountAfterGST = annualAmountBeforeGST * 1.18; // Corrected calculation for after GST
 
         const row = tableBody.insertRow(0);
         row.insertCell().textContent = dailyAmount.toFixed(2);
         row.insertCell().textContent = annualAmountBeforeGST.toFixed(2);
         row.insertCell().textContent = emd.toFixed(2);
         row.insertCell().textContent = annualAmountAfterGST.toFixed(2);
+
+        // Update Calculation History
+        updateCalculationHistory(dailyAmount, annualAmountBeforeGST, emd, annualAmountAfterGST);
       } else {
         alert("Please enter a valid positive daily amount.");
       }
     }
-  </script>
 
+    function updateCalculationHistory(dailyAmount, annualAmountBeforeGST, emd, annualAmountAfterGST) {
+      const row = historyTableBody.insertRow();
+      row.insertCell().textContent = dailyAmount.toFixed(2);
+      row.insertCell().textContent = annualAmountBeforeGST.toFixed(2);
+      row.insertCell().textContent = emd.toFixed(2);
+      row.insertCell().textContent = annualAmountAfterGST.toFixed(2);
+    }
+  </script>
 </body>
 </html>
