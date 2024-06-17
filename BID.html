@@ -69,8 +69,6 @@
     }
   </style>
 </head>
-<body>
-
   <h2>IRPES - Bid Value Calculator</h2>
   <h3><a href="https://www.instagram.com/i_sahil.saurav/">by Sahil</a></h3>
 
@@ -83,11 +81,9 @@
       <tr>
         <th>Daily Amount (₹)</th>
         <th>Bid Value (3 Years) (₹)</th>
-        <th>Bid Value (15 Years-BOT) (₹)</th>
         <th>Daily Amount (With 18% GST) (₹)</th>
         <th>Annual Amount (With 18% GST) (₹)</th>
         <th>Bid Value (3 Years) (With 18% GST) (₹)</th>
-        <th>Bid Value (15 Years-BOT) (With 18% GST) (₹)</th>
         <th>EMD (5%) (₹)</th>
       </tr>
     </thead>
@@ -100,11 +96,9 @@
       <tr>
         <th>Daily Amount (₹)</th>
         <th>Bid Value (3 Years) (₹)</th>
-        <th>Bid Value (15 Years) (₹)</th>
         <th>Daily Amount (With 18% GST) (₹)</th>
         <th>Annual Amount (With 18% GST) (₹)</th>
         <th>Bid Value (3 Years) (With 18% GST) (₹)</th>
-        <th>Bid Value (15 Years) (With 18% GST) (₹)</th>
         <th>EMD (5%) (₹)</th>
       </tr>
     </thead>
@@ -114,53 +108,49 @@
   <hr>
   <hr>
   <a href="index.html">IRPES- Annual EMD GST CALCULATOR</a>
+
   <script>
     const historyTableBody = document.getElementById("historyTable").getElementsByTagName('tbody')[0];
 
     function calculateBidValues() {
       const totalAnnualAmount = parseFloat(document.getElementById("totalAnnualAmount").value);
       const tableBody = document.getElementById("bidTable").getElementsByTagName('tbody')[0];
-      tableBody.innerHTML = ''; // Clear previous results
+      tableBody.innerHTML = ''; 
 
       if (!isNaN(totalAnnualAmount) && totalAnnualAmount > 0) {
         const dailyAmount = totalAnnualAmount / 365;
         const bidValue3Years = totalAnnualAmount * 3;
-        const bidValue15Years = totalAnnualAmount * 15;
         const dailyAmountWithGST = (totalAnnualAmount * 1.18) / 365;
         const annualAmountWithGST = totalAnnualAmount * 1.18;
         const bidValue3YearsWithGST = bidValue3Years * 1.18;
-        const bidValue15YearsWithGST = bidValue15Years * 1.18;
         const emd = 0.05 * totalAnnualAmount;
 
         const row = tableBody.insertRow();
         row.insertCell().textContent = dailyAmount.toFixed(2);
         row.insertCell().textContent = bidValue3Years.toFixed(2);
-        row.insertCell().textContent = bidValue15Years.toFixed(2);
         row.insertCell().textContent = dailyAmountWithGST.toFixed(2);
         row.insertCell().textContent = annualAmountWithGST.toFixed(2);
         row.insertCell().textContent = bidValue3YearsWithGST.toFixed(2);
-        row.insertCell().textContent = bidValue15YearsWithGST.toFixed(2);
         row.insertCell().textContent = emd.toFixed(2);
 
-        // Update Calculation History
-        updateCalculationHistory(dailyAmount, bidValue3Years, bidValue15Years, dailyAmountWithGST, annualAmountWithGST, bidValue3YearsWithGST, bidValue15YearsWithGST, emd); 
+        // Update Calculation History (without 15-year values)
+        updateCalculationHistory(dailyAmount, bidValue3Years, dailyAmountWithGST, annualAmountWithGST, bidValue3YearsWithGST, emd);
       } else {
         alert("Please enter a valid positive annual amount.");
       }
     }
   
-    function updateCalculationHistory(dailyAmount, bidValue3Years, bidValue15Years, dailyAmountWithGST, annualAmountWithGST, bidValue3YearsWithGST, bidValue15YearsWithGST, emd) {
+    function updateCalculationHistory(dailyAmount, bidValue3Years, dailyAmountWithGST, annualAmountWithGST, bidValue3YearsWithGST, emd) {
       const row = historyTableBody.insertRow();
       row.insertCell().textContent = dailyAmount.toFixed(2);
       row.insertCell().textContent = bidValue3Years.toFixed(2);
-      row.insertCell().textContent = bidValue15Years.toFixed(2);
       row.insertCell().textContent = dailyAmountWithGST.toFixed(2);
       row.insertCell().textContent = annualAmountWithGST.toFixed(2);
       row.insertCell().textContent = bidValue3YearsWithGST.toFixed(2);
-      row.insertCell().textContent = bidValue15YearsWithGST.toFixed(2);
       row.insertCell().textContent = emd.toFixed(2);
     }
   </script>
 
 </body>
 </html>
+<body>
