@@ -101,8 +101,7 @@
     function calculateEMD() {
       const dailyAmount = parseFloat(document.getElementById("dailyAmount").value);
       const tableBody = document.getElementById("emdTable").getElementsByTagName('tbody')[0];
-      tableBody.innerHTML = ""; // Clear previous results
-
+      
       if (!isNaN(dailyAmount) && dailyAmount > 0) {
         const annualAmountWithoutGST = dailyAmount * 365;
         const emd = 0.05 * annualAmountWithoutGST;
