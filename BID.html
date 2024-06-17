@@ -84,8 +84,8 @@
         <th>Daily Amount (₹)</th>
         <th>Bid Value (3 Years) (₹)</th>
         <th>Bid Value (15 Years) (₹)</th>
-        <th>Annual Amount (With 18% GST) (₹)</th>
         <th>Daily Amount (With 18% GST) (₹)</th>
+        <th>Annual Amount (With 18% GST) (₹)</th>
         <th>Bid Value (3 Years) (With 18% GST) (₹)</th>
         <th>Bid Value (15 Years) (With 18% GST) (₹)</th>
         <th>EMD (5%) (₹)</th>
@@ -101,11 +101,11 @@
       tableBody.innerHTML = '';
 
       if (!isNaN(totalAnnualAmount) && totalAnnualAmount > 0) {
-        const dailyAmount = totalAnnualAmount / 365;
-        const annualAmountWithGST = totalAnnualAmount * 1.18; // Added calculation
+        const dailyAmount = totalAnnualAmount / 365; 
         const bidValue3Years = totalAnnualAmount * 3;
         const bidValue15Years = totalAnnualAmount * 15;
         const dailyAmountWithGST = (totalAnnualAmount * 1.18) / 365; 
+        const annualAmountWithGST = totalAnnualAmount * 1.18;
         const bidValue3YearsWithGST = bidValue3Years * 1.18;
         const bidValue15YearsWithGST = bidValue15Years * 1.18;
         const emd = 0.05 * totalAnnualAmount;
