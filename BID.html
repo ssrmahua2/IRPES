@@ -2,7 +2,72 @@
 <html>
 <head>
   <title>IRPES - Bid Value Calculator</title>
-  <style> /* ... (styles from previous response) ... */ </style>
+  <style>
+    body {
+      font-family: sans-serif;
+      font-size: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px;
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, button {
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    table {
+      width: 100%;
+      max-width: 800px;
+      border-collapse: collapse;
+      margin-top: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    thead {
+      background-color: #f2f2f2;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 600px) {
+      table {
+        font-size: 14px;
+      }
+      th, td {
+        padding: 6px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -18,11 +83,11 @@
       <tr>
         <th>Daily Amount (₹)</th>
         <th>Bid Value (3 Years) (₹)</th>
-        <th>Bid Value (15 Years) (₹)</th>
+        <th>Bid Value (15 Years-BOT) (₹)</th>
         <th>Daily Amount (With 18% GST) (₹)</th>
         <th>Annual Amount (With 18% GST) (₹)</th>
         <th>Bid Value (3 Years) (With 18% GST) (₹)</th>
-        <th>Bid Value (15 Years) (With 18% GST) (₹)</th>
+        <th>Bid Value (15 Years-BOT) (With 18% GST) (₹)</th>
         <th>EMD (5%) (₹)</th>
       </tr>
     </thead>
@@ -32,9 +97,10 @@
   <div id="calculationHistory">
     <h3>Calculation History</h3>
   </div>
-<hr>
+  
   <hr>
-<a href="index.html">IRPES- Annual EMD GST CALCULATOR</a>
+  <hr>
+  <a href="index.html">IRPES- Annual EMD GST CALCULATOR</a>
 
   <script>
     const calculationHistoryDiv = document.getElementById('calculationHistory');
@@ -45,7 +111,24 @@
       tableBody.innerHTML = ''; // Clear previous results
 
       if (!isNaN(totalAnnualAmount) && totalAnnualAmount > 0) {
-        // ... (calculations from previous responses) ...
+        const dailyAmount = totalAnnualAmount / 365;
+        const bidValue3Years = totalAnnualAmount * 3;
+        const bidValue15Years = totalAnnualAmount * 15;
+        const dailyAmountWithGST = (totalAnnualAmount * 1.18) / 365;
+        const annualAmountWithGST = totalAnnualAmount * 1.18;
+        const bidValue3YearsWithGST = bidValue3Years * 1.18;
+        const bidValue15YearsWithGST = bidValue15Years * 1.18;
+        const emd = 0.05 * totalAnnualAmount;
+
+        const row = tableBody.insertRow();
+        row.insertCell().textContent = dailyAmount.toFixed(2);
+        row.insertCell().textContent = bidValue3Years.toFixed(2);
+        row.insertCell().textContent = bidValue15Years.toFixed(2);
+        row.insertCell().textContent = dailyAmountWithGST.toFixed(2);
+        row.insertCell().textContent = annualAmountWithGST.toFixed(2);
+        row.insertCell().textContent = bidValue3YearsWithGST.toFixed(2);
+        row.insertCell().textContent = bidValue15YearsWithGST.toFixed(2);
+        row.insertCell().textContent = emd.toFixed(2);
 
         // Update Calculation History
         updateCalculationHistory(totalAnnualAmount);
@@ -53,7 +136,7 @@
         alert("Please enter a valid positive annual amount.");
       }
     }
-
+   
     function updateCalculationHistory(totalAnnualAmount) {
       // Create a new table to display the history for this calculation
       const historyTable = document.createElement('table');
@@ -68,6 +151,15 @@
       headerRow.insertCell().textContent = 'EMD (5%) (₹)';
       
       // ... (calculate values like in calculateBidValues function) ...
+        const dailyAmount = totalAnnualAmount / 365;
+        const bidValue3Years = totalAnnualAmount * 3;
+        const bidValue15Years = totalAnnualAmount * 15;
+        const dailyAmountWithGST = (totalAnnualAmount * 1.18) / 365;
+        const annualAmountWithGST = totalAnnualAmount * 1.18;
+        const bidValue3YearsWithGST = bidValue3Years * 1.18;
+        const bidValue15YearsWithGST = bidValue15Years * 15;
+        const emd = 0.05 * totalAnnualAmount;
+
 
       const row = historyTable.insertRow();
       row.insertCell().textContent = dailyAmount.toFixed(2);
