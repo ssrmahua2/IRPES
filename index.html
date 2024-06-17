@@ -1,80 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>IRPES - EMD/Annual Calculation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: sans-serif;
-      font-size: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 20px;
-    }
 
-    h2, h3 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    input, button {
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    table {
-      width: 100%;
-      max-width: 800px;
-      border-collapse: collapse;
-      margin-top: 15px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      text-align: center;
-      padding: 8px;
-    }
-
-    thead {
-      background-color: #f2f2f2;
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    /* Mobile Styles */
-    @media (max-width: 600px) {
-      table {
-        font-size: 14px;
-      }
-      th, td {
-        padding: 6px;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  
-Conversation with Gemini
-expand_more
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,7 +86,7 @@ expand_more
         <th>Daily Amount (₹)</th>
         <th>Annual Amount<br>(Without GST) (₹)</th>
         <th>EMD<br>(5%) (₹)</th>
-        <th>Annual Amount<br>(Before 18% GST (अगर 18% GST लगता है। तो Bid में यह अमाउंट डाले। ) (₹)</th>
+        <th>Annual Amount<br>(  Before 18% GST (अगर 18% GST लगता है। तो Bid में यह अमाउंट डाले। आपको प्रति दिन उतना परेगा जितना आपने Daily में डाला है।) (₹)</th>
       </tr>
     </thead>
     <tbody></tbody>
@@ -195,76 +119,5 @@ expand_more
         alert("Please enter a valid positive daily amount.");
       }
   </script>
-</body>
-</html>.  Add a column at last "Annual amount after 18% GST( GST लगा कर सालाना होगा| ) (formula (daily amount*365)+18%)
-
-
-Show drafts
-expand_more
-volume_up
-Absolutely! Here's the updated code with the new column and the corrected GST calculation:
-
-HTML
-<!DOCTYPE html>
-<html>
-<head>
-  <title>IRPES - EMD/Annual Calculation</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    /* ... (rest of your styles are the same) ... */
-  </style>
-</head>
-<body>
-
-  <h2>IRPES Calculation - Annual, EMD, and GST</h2>
-  <h3><a href="https://www.instagram.com/i_sahil.saurav/">by Sahil</a></h3>
-  </body>
-  <label for="dailyAmount">Enter Daily Amount (₹):</label>
-  <input type="number" id="dailyAmount" value="100">
-  <button onclick="calculateEMD()">Calculate</button>
-
-  <table id="emdTable">
-    <thead>
-      <tr>
-        <th>Daily Amount (₹)</th>
-        <th>Annual Amount<br>(Without GST) (₹)</th>
-        <th>EMD<br>(5%) (₹)</th>
-        <th>Annual Amount<br>(Before 18% GST (अगर 18% GST लगता है। तो Bid में यह अमाउंट डाले। आपको प्रति दिन उतना परेगा जितना आपने Daily में डाला है।) (₹)</th>
-        
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-  <hr>
-  <hr>
-  <a href="BID.html">IRPES- BID CALCULATOR</a>
-
-  <script>
-    const historyTableBody = document.getElementById("historyTable").getElementsByTagName('tbody')[0];
-
-    function calculateEMD() {
-      const dailyAmount = parseFloat(document.getElementById("dailyAmount").value);
-      const tableBody = document.getElementById("emdTable").getElementsByTagName('tbody')[0];
-
-      if (!isNaN(dailyAmount) && dailyAmount > 0) {
-        const annualAmountBeforeGST = dailyAmount * 365;
-        const emd = 0.05 * annualAmountBeforeGST;
-        // Calculate the annual amount after adding 18% GST
-        const annualAmountAfterGST = annualAmountBeforeGST + (annualAmountBeforeGST * 0.18); 
-        
-        const row = tableBody.insertRow(0);
-        row.insertCell().textContent = dailyAmount.toFixed(2);
-        row.insertCell().textContent = annualAmountBeforeGST.toFixed(2);
-        row.insertCell().textContent = emd.toFixed(2);
-        row.insertCell().textContent = annualAmountBeforeGST.toFixed(2); // This is still before GST 
-        
-        
-      } else {
-        alert("Please enter a valid positive daily amount.");
-      }
-    }
-  </script>
-
 </body>
 </html>
