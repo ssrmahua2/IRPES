@@ -97,25 +97,24 @@
   <hr>
   <a href="BID.html">IRPES- BID CALCULATOR</a>
 
-  <script>
-   
+ <script>
     function calculateEMD() {
       const dailyAmount = parseFloat(document.getElementById("dailyAmount").value);
       const tableBody = document.getElementById("emdTable").getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = ""; // Clear previous results
 
       if (!isNaN(dailyAmount) && dailyAmount > 0) {
-        const annualAmountBeforeGST = dailyAmount * 365;
-        const emd = 0.05 * annualAmountBeforeGST;
-        const annualAmountAfterGST = annualAmountBeforeGST * 0.84746;
-         const emdWithGST = annualAmountWithGST * 0.05; 
-        const row = tableBody.insertRow(0);
+        const annualAmountWithoutGST = dailyAmount * 365;
+        const emd = 0.05 * annualAmountWithoutGST;
+        const annualAmountWithGST = annualAmountWithoutGST * 0.84746; 
+        const emdWithGST = annualAmountWithGST * 0.05; 
+
+        const row = tableBody.insertRow();
         row.insertCell().textContent = dailyAmount.toFixed(2);
-        row.insertCell().textContent = annualAmountBeforeGST.toFixed(2);
+        row.insertCell().textContent = annualAmountWithoutGST.toFixed(2);
         row.insertCell().textContent = emd.toFixed(2);
-        row.insertCell().textContent = annualAmountAfterGST.toFixed(2);
-          row.insertCell().textContent = emdWithGST.toFixed(2); 
-         
-        
+        row.insertCell().textContent = annualAmountWithGST.toFixed(2);
+        row.insertCell().textContent = emdWithGST.toFixed(2); 
       } else {
         alert("Please enter a valid positive daily amount.");
       }
