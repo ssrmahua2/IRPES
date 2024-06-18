@@ -141,7 +141,7 @@
     }
   
     function updateCalculationHistory(dailyAmount, bidValue3Years, dailyAmountWithGST, annualAmountWithGST, bidValue3YearsWithGST, emd) {
-      const row = historyTableBody.insertRow();
+      const row = historyTableBody.insertRow(0);
       row.insertCell().textContent = dailyAmount.toFixed(2);
       row.insertCell().textContent = bidValue3Years.toFixed(2);
       row.insertCell().textContent = dailyAmountWithGST.toFixed(2);
