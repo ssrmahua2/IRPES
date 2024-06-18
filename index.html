@@ -108,7 +108,7 @@
         const annualAmountWithGST = annualAmountWithoutGST * 0.84746; 
         const emdWithGST = annualAmountWithGST * 0.05; 
 
-        const row = tableBody.insertRow();
+        const row = tableBody.insertRow(0);
         row.insertCell().textContent = dailyAmount.toFixed(2);
         row.insertCell().textContent = annualAmountWithoutGST.toFixed(2);
         row.insertCell().textContent = emd.toFixed(2);
