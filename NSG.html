@@ -136,7 +136,7 @@
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("searchInput");
         filter = input.value.toUpperCase();
-        table = "<table><tr><th>S No</th><th>Station Name</th><th>Station Code</th><th>Station Category</th><th>Division</th><th>Zone</th><th>District</th><th>State</th></tr>";
+        table = "<table><tr><th>Station Name</th><th>Station Code</th><th>Station Category</th><th>Division</th><th>Zone</th><th>District</th><th>State</th></tr>";
         for (i = 0; i < stationData.length; i++) {
             txtValue = stationData[i]["Station Name"] + stationData[i]["Station Code"];
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
